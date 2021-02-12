@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<div class="card">
+<p-table #datasv [value]="datas" [rows]="5" [paginator]="true" [globalFilterFields]="['Product_Id','Product_Name']"
+[rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" >
+<ng-template pTemplate="caption">
+    <div class="table-header">
+        Manage order
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="datasv.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+        </span>
+    </div>
+</ng-template>
+
+    <ng-template pTemplate="header" >
+        <tr class="bg-blue">
+            <th pSortableColumn="Product_Id"  >Product_id <p-sortIcon field="Product_Id"></p-sortIcon></th>
+            <th id="pname">Product_Name</th>
+            <th pSortableColumn="Price" >Price<p-sortIcon field="Price"></p-sortIcon></th>
+            <th>lastest_avaliabity</th>
+            <th>Available_Stock</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data  let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="data">
+            <td>{{data.Product_Id}}</td>
+            <td>{{data.Product_Name}}</td>
+            <td>{{data.Price | currency: 'INR'}}</td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="data.lastest_avaliabity">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{data.lastest_avaliabity}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                
+               <span class="p-badge p-badge-l p-badge-sucess">{{data.Available_Stock}}</span>
+               
+            </td>
+            <td style="text-align:center">
+                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(data)" class="p-button-rounded p-button-text"></button>
+                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(data)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(data, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{datas ? datas.length : 0 }} datas.
+        </div>
+    </ng-template>
+
+</p-table>
+</div>
+
