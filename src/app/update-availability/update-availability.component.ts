@@ -16,16 +16,15 @@ datas: stockupdate[];
 one:any;
    public anyd: Array<{ProductName : String, product_id:string, price:Int16Array ,aval:number,lasaval:number}> = [];
  
- 
-  productDialog: boolean;
-  submitted: boolean;
+  dialog:boolean;
   datass: any;
-  clonedProducts: any;
+  Updatelav : number;
   products2: any;
   constructor(private confirmationService: ConfirmationService,private http:HttpClient, private _messageService: MessageService,private _productprice:productprice) { 
   }
 
   ngOnInit(): void {
+    
    this._productprice.getprodlst().subscribe(data =>{
    this.datas=data;
     for (let i=0 ; i < this.datas.length ;i++){
@@ -44,21 +43,8 @@ one:any;
 
 onRowEditInit(product: stockupdate) {
   console.log(product)
-  this.clonedProducts[product.id] = {...product};
+  this.Updatelav=null;
+  this.dialog = true;
 }
 
-onRowEditSave(product: stockupdate) {
-  if (product.Price ) {
-      delete this.clonedProducts[product.id];
-      this._messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
-  }  
-  else {
-      this._messageService.add({severity:'error', summary: 'Error', detail:'Invalid Price'});
-  }
-}
-
-onRowEditCancel(product: stockupdate, index: number) {
-  this.products2[index] = this.clonedProducts[product.id];
-  delete this.clonedProducts[product.id];
-}
 }

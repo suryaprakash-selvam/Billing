@@ -21,7 +21,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
-import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {DialogModule} from 'primeng/dialog';
 import { UpdateAvailabilityComponent } from './update-availability/update-availability.component';
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { UpdateAvailabilityComponent } from './update-availability/update-availa
     InputSwitchModule,
     RadioButtonModule,
     InputNumberModule,
-    DynamicDialogModule
+    DialogModule
 
 
   ],

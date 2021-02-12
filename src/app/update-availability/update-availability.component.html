@@ -3,6 +3,7 @@
 <div class="card">
 <p-table #datasv [value]="datas" [rows]="5" [paginator]="true" [globalFilterFields]="['Product_Id','Product_Name']"
 [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" >
+<div class="card shadow p-3 mb-5 bg-primary rounded ">
 <ng-template pTemplate="caption">
     <div class="table-header">
         Manage order
@@ -12,9 +13,9 @@
         </span>
     </div>
 </ng-template>
-
-    <ng-template pTemplate="header" >
-        <tr class="bg-blue">
+</div>
+    <ng-template pTemplate="header" class="bg-primary ">
+        <tr >
             <th pSortableColumn="Product_Id"  >Product_id <p-sortIcon field="Product_Id"></p-sortIcon></th>
             <th id="pname">Product_Name</th>
             <th pSortableColumn="Price" >Price<p-sortIcon field="Price"></p-sortIcon></th>
@@ -44,10 +45,8 @@
                
             </td>
             <td style="text-align:center">
-                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(data)" class="p-button-rounded p-button-text"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(data)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(data, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-            </td>
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(data)" class="p-button-rounded p-button-text"></button>
+                </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
@@ -59,3 +58,13 @@
 </p-table>
 </div>
 
+<p-dialog [(visible)]="dialog"  styleClass="mydialog">
+    <ng-template pTemplate="header" class="bg-primary">
+       Updating Stock 
+    </ng-template>
+    <label for="upstock">Update the value : </label> <br>
+    <input type="number" pInputText [(ngModel)]="Updatelav"/>
+    <p-footer>
+        <button pButton>Save</button>
+    </p-footer>
+</p-dialog>
