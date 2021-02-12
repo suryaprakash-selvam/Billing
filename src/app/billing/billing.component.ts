@@ -5,7 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import {MessageService} from 'primeng/api';
 import {HttpClient, HttpResponse} from '@angular/common/http'
 import { productprice } from 'src/app/services/getproduct.service';
-import {productdet} from 'src/app/details/product'
+import {productdet,stockupdate} from 'src/app/details/product'
 
 @Component({
   selector: 'app-billing',
@@ -13,9 +13,9 @@ import {productdet} from 'src/app/details/product'
   styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit,AfterViewInit  {
-  public fieldArray: Array<{ProductName : String,Qvantity:number, price:number ,totalprice:number}> = [];
+  public fieldArray: Array<{ProductName : String,Qvantity:number, price:Int16Array ,totalprice:number}> = [];
   newAttribute: any = {};
-  productdet : productdet[];
+  productdet : stockupdate[];
  customers:any = {};
  tprice: any =0;
  field :any ;
@@ -54,7 +54,7 @@ getprice(productid: String,qty:number) : any{
 this.productdet=data;
 if ( this.productdet[0]!= null ){
 console.log( "product : ", this.productdet[0].Price)
-  this.cal(this.productdet[0].Price,this.productdet[0].Product_Des,qty)
+  this.cal(this.productdet[0].Price,this.productdet[0].Product_Name,qty)
 
 }else{
    
@@ -67,9 +67,9 @@ console.log( "product : ", this.productdet[0].Price)
   return  
 }
 
-cal(pricef : number,productname : any,qty:number){
+cal(pricef : any,productname : any,qty:number ){
 
-  this.tprodprice = pricef * qty;
+  this.tprodprice = pricef* qty;
   this.sgst=(5/100);
   this.gst=  (this.tprodprice * this.sgst);
   this.fieldArray.push({ProductName : productname,Qvantity:this.quantity ,price:pricef,totalprice:this.tprodprice});

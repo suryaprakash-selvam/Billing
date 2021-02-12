@@ -40,8 +40,12 @@
                 </p-cellEditor>
             </td>
             <td>
-                
-               <span class="p-badge p-badge-l p-badge-sucess">{{data.Available_Stock}}</span>
+                <div class="badges mt-2">
+                    <span class="p-tag p-tag-rounded p-tag-success" *ngIf="data.Available_Stock >9"> In Stock :{{data.Available_Stock}}</span>
+                    <span class="p-tag p-tag-rounded p-tag-warning" *ngIf="data.Available_Stock >0 && data.Available_Stock <= 9"> Limited Stock :{{data.Available_Stock}}</span>
+                    <span class="p-tag p-tag-rounded p-tag-danger" *ngIf="data.Available_Stock <= 0 ">  Currently out of stock </span>
+                </div>
+               <!-- <span class="p-badge p-badge-l p-badge-sucess">{{data.Available_Stock}}</span> -->
                
             </td>
             <td style="text-align:center">
