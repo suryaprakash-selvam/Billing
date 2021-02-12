@@ -6,6 +6,7 @@ const app = express();
 const mysql = require('mysql');
 var dateTime = require('node-datetime');
 var dt = dateTime.create();
+
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
@@ -29,7 +30,7 @@ app.get('/pro/:id',(req, res) =>{
         
     })
 
-    const queryString="SELECT * FROM product_det where product_id=?"
+    const queryString="SELECT * FROM stock_manager where product_id=?"
 connect.query( queryString,[req.params.id],(err, rows, fields) => {
     if (err){
         console.log(err)
@@ -180,8 +181,10 @@ var cname=req.body.Remarks;
    var  lastest_avaliabit = req.body.lastest_avaliabity;
    var Available_Stoc =req.body.Available_Stock;
    
+   var avil= parseInt(lastest_avaliabit) + parseInt(Available_Stoc);
+   console.log ("avil :",avil)
    const queryString="update stock_manager set lastest_avaliabity =?,Available_Stock =? where Product_Id=?;"
-  connect.query( queryString,[lastest_avaliabit,Available_Stoc,Product_Id],(err, result) => {
+  connect.query( queryString,[lastest_avaliabit,avil,Product_Id],(err, result) => {
       if (err){
           console.log(err)
           return res.status(501).send(err)

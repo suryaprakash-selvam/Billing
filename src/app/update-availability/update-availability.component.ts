@@ -20,6 +20,9 @@ one:any;
   datass: any;
   Updatelav : number;
   products2: any;
+  chachePid: stockupdate;
+  chacheavs: number;
+  router: any;
   constructor(private confirmationService: ConfirmationService,private http:HttpClient, private _messageService: MessageService,private _productprice:productprice) { 
   }
 
@@ -27,24 +30,51 @@ one:any;
     
    this._productprice.getprodlst().subscribe(data =>{
    this.datas=data;
-    for (let i=0 ; i < this.datas.length ;i++){
-      console.log("listed datas : ",this.datas[i].Product_Name);
-       this.one=this.datas[1].Product_Name;
-      this.update(this.datas[i].Product_id,this.datas[i].Product_id,this.datas[i].Price,this.datas[i].Available_Stock,this.datas[i].lastest_avaliabity);
-    }
+   
      
    })
   }
 
-  update(Product_Name: string, Product_id: any, Price: Int16Array, Available_Stock: number, lastest_avaliabity: number) {
-    this.anyd.push({ProductName : Product_Name, product_id:Product_id, price:Price ,aval:Available_Stock,lasaval:lastest_avaliabity})
-  //  console.log(" uypatdvbcfjif ",this.anyd)
-  }
+
 
 onRowEditInit(product: stockupdate) {
-  console.log(product)
+  console.log(product.Available_Stock)
   this.Updatelav=null;
+  this.chachePid=product;
+ 
   this.dialog = true;
+
+}
+
+save(){
+  console.log("djifj",this.chachePid)
+console.log(this.chachePid.Product_Id ,"check",this.Updatelav,"andbd",this.chachePid.Available_Stock );
+  this.stockup(this.chachePid.Product_Id,this.chachePid.Available_Stock,this.Updatelav);
+
+}
+
+ 
+  stockup(product_id:any , available_Stock:number,updateev:number){
+  console.log(product_id,"1c",available_Stock,"2c",updateev)
+  let url1="http://localhost:3005/stockupdating/"
+  this.http.put(url1,{
+    Pid:product_id,
+    lastest_avaliabity:updateev,
+    Available_Stock : available_Stock
+    
+   } ).subscribe(data => {
+
+    this._messageService.add({severity:'success', summary:'Status ', detail:'Stock update for :' +product_id});
+    console.log("suc  ",data);
+    this.dialog=false
+   this.ngOnInit()
+    
+   },(error) => {
+    console.log("err ",error);
+    this._messageService.add({severity:'error', summary:'error ', detail:'Check proper data :' +product_id});
+   }
+
+   )
 }
 
 }

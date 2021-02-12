@@ -46,7 +46,8 @@
             </td>
             <td style="text-align:center">
                 <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(data)" class="p-button-rounded p-button-text"></button>
-                </td>
+                <button  pButton pRipple type="button"  icon="pi pi-trash" class="p-button-rounded p-button-text"></button>    
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
@@ -58,13 +59,13 @@
 </p-table>
 </div>
 
-<p-dialog [(visible)]="dialog"  styleClass="mydialog">
+<p-dialog [(visible)]="dialog" position="right" styleClass="mydialog">
     <ng-template pTemplate="header" class="bg-primary">
-       Updating Stock 
+       Updating Stock for {{chachePid.Product_Id}}
     </ng-template>
-    <label for="upstock">Update the value : </label> <br>
-    <input type="number" pInputText [(ngModel)]="Updatelav"/>
+    <label for="upstock"> Update Stock :  </label> <br>
+    <input type="number" pInputText [(ngModel)]="Updatelav"  placeholder="Latest stock" required/>
     <p-footer>
-        <button pButton>Save</button>
+        <button pButton  (click)="save()">Save</button>
     </p-footer>
 </p-dialog>

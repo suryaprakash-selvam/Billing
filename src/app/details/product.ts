@@ -12,7 +12,7 @@ Remarks:String;
 
 export class stockupdate{
     id : number;
-    Product_id:any;
+    Product_Id:any;
     Price:Int16Array;
     lastest_avaliabity: number;
     Available_Stock: number;
