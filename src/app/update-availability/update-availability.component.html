@@ -16,7 +16,7 @@
 </div>
     <ng-template pTemplate="header" class="bg-primary ">
         <tr >
-            <th pSortableColumn="Product_Id"  >Product_id <p-sortIcon field="Product_Id"></p-sortIcon></th>
+            <th pSortableColumn="Product_Id"  type="number">Product_id<p-sortIcon field="Product_Id"></p-sortIcon></th>
             <th id="pname">Product_Name</th>
             <th pSortableColumn="Price" >Price<p-sortIcon field="Price"></p-sortIcon></th>
             <th>lastest_avaliabity</th>
@@ -26,7 +26,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-data  let-editing="editing" let-ri="rowIndex">
         <tr [pEditableRow]="data">
-            <td>{{data.Product_Id}}</td>
+            <td type="number">{{data.Product_Id}}</td>
             <td>{{data.Product_Name}}</td>
             <td>{{data.Price | currency: 'INR'}}</td>
             <td>
@@ -50,7 +50,7 @@
             </td>
             <td style="text-align:center">
                 <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(data)" class="p-button-rounded p-button-text"></button>
-                <button  pButton pRipple type="button"  icon="pi pi-trash" class="p-button-rounded p-button-text"></button>    
+                <button  pButton pRipple type="button"  icon="pi pi-trash" class="p-button-rounded p-button-text"  (click)="onRowdeleteInit(data.Product_Id)"></button>    
             </td>
         </tr>
     </ng-template>
@@ -63,6 +63,9 @@
 </p-table>
 </div>
 
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
 <p-dialog [(visible)]="dialog" position="right" styleClass="mydialog">
     <ng-template pTemplate="header" class="bg-primary">
        Updating Stock for {{chachePid.Product_Id}}
@@ -73,3 +76,5 @@
         <button pButton  (click)="save()">Save</button>
     </p-footer>
 </p-dialog>
+
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { productprice } from 'src/app/services/getproduct.service';
+
+  import { productprice   } from 'src/app/services/getproduct.service';
 
 import {HttpClient, HttpResponse} from '@angular/common/http'
 import {ConfirmationService, MessageService, SortEvent} from 'primeng/api';
@@ -35,8 +36,6 @@ one:any;
    })
   }
 
-
-
 onRowEditInit(product: stockupdate) {
   console.log(product.Available_Stock)
   this.Updatelav=null;
@@ -49,8 +48,11 @@ onRowEditInit(product: stockupdate) {
 save(){
   console.log("djifj",this.chachePid)
 console.log(this.chachePid.Product_Id ,"check",this.Updatelav,"andbd",this.chachePid.Available_Stock );
+if(this.Updatelav != null && this.Updatelav!= 0){
   this.stockup(this.chachePid.Product_Id,this.chachePid.Available_Stock,this.Updatelav);
-
+}else{
+  this._messageService.add({severity:'warn', summary:'Status', detail:this.Updatelav+' is unable to add'});
+}
 }
 
  
@@ -76,5 +78,28 @@ console.log(this.chachePid.Product_Id ,"check",this.Updatelav,"andbd",this.chach
 
    )
 }
+
+onRowdeleteInit(Product){
+  this.confirmationService.confirm({
+    message: 'Record Need to delete ? ',
+    accept: () => {
+        this.confirs(Product)
+    }
+});
+
+}
+  confirs(Product: any) {
+    console.log(Product);
+this._productprice.delprod(Product).subscribe(data => {
+  console.log("deleted rows",data)
+  var temp = data;
+  if (temp == "1"){
+    this._messageService.add({severity:'success', summary:'Delete ', detail:'DELETED PRODUCT ID :' +Product});
+    this.ngOnInit()
+  }else {
+    this._messageService.add({severity:'error', summary:'Delete ', detail:'Duplicate :' +Product});
+  }
+})
+  }
 
 }

@@ -10,26 +10,23 @@ var dt = dateTime.create();
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
-    
     res.setHeader('Access-Control-Allow-Origin', '*');   
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization');
     next();
   });
 
+  const connect=mysql.createConnection({
+    host:'localhost', 
+    port: 3306,
+    user:'root',
+    password:'root',
+    database:'textlies'
+    
+})
+
+
 app.get('/pro/:id',(req, res) =>{
- 
-  //  console.log("pro with id of " + req.params.id);
-
-    const connect=mysql.createConnection({
-        host:'localhost', 
-        port: 3306,
-        user:'root',
-        password:'root',
-        database:'textlies'
-        
-    })
-
     const queryString="SELECT * FROM stock_manager where product_id=?"
 connect.query( queryString,[req.params.id],(err, rows, fields) => {
     if (err){
@@ -44,19 +41,8 @@ connect.query( queryString,[req.params.id],(err, rows, fields) => {
 })
 
 
+
 app.get('/productlst/',(req, res) =>{
- 
-    //  console.log("pro with id of " + req.params.id);
-  
-      const connect=mysql.createConnection({
-          host:'localhost', 
-          port: 3306,
-          user:'root',
-          password:'root',
-          database:'textlies'
-          
-      })
-  
       const queryString="SELECT * FROM stock_manager"
   connect.query( queryString,(err, rows, fields) => {
       if (err){
@@ -74,17 +60,6 @@ app.get('/productlst/',(req, res) =>{
 
 app.get('/Billnumber/',(req, res) =>{
  
-    //  console.log("pro with id of " + req.params.id);
-  
-      const connect=mysql.createConnection({
-          host:'localhost', 
-          port: 3306,
-          user:'root',
-          password:'root',
-          database:'textlies'
-          
-      })
-  
       const queryString="select max(Bill_Number) from textlies.bill_details;"
   connect.query( queryString,(err, rows, fields) => {
       if (err){
@@ -100,16 +75,6 @@ app.get('/Billnumber/',(req, res) =>{
 
 
   app.post('/ProdUp',(req, res) =>{
-
-   
-      const connect=mysql.createConnection({
-          host:'localhost', 
-          port: 3306,
-          user:'root',
-          password:'root',
-          database:'textlies'
-      })
-      
     var formatted = dt.format('Y-m-d');
 var Prod_Id=req.body.ProductId;     
 var prod_dec=req.body.ProductDes;
@@ -131,17 +96,6 @@ var cname=req.body.Remarks;
 
 
   app.post('/stockupdate/',(req, res) =>{
- 
-    //  console.log("pro with id of " + req.params.id);
-  
-      const connect=mysql.createConnection({
-          host:'localhost', 
-          port: 3306,
-          user:'root',
-          password:'root',
-          database:'textlies'
-          
-      })
    var   Product_Id =req.body.Pid;
    var  Price = req.body.Price;
    var  lastest_avaliabity = req.body.lastest_avaliabity;
@@ -166,21 +120,10 @@ var cname=req.body.Remarks;
 
   
   app.put('/stockupdating/',(req, res) =>{
- 
-    console.log("pro with id of " + req.body.id);
-  
-      const connect=mysql.createConnection({
-          host:'localhost', 
-          port: 3306,
-          user:'root',
-          password:'root',
-          database:'textlies'
-
-      })
+   console.log("pro with id of " + req.body.id);
    var   Product_Id =req.body.Pid;
    var  lastest_avaliabit = req.body.lastest_avaliabity;
    var Available_Stoc =req.body.Available_Stock;
-   
    var avil= parseInt(lastest_avaliabit) + parseInt(Available_Stoc);
    console.log ("avil :",avil)
    const queryString="update stock_manager set lastest_avaliabity =?,Available_Stock =? where Product_Id=?;"
@@ -193,6 +136,24 @@ var cname=req.body.Remarks;
       res.json(result)
   })
   })
+
+
+app.delete('/delStock/:id',(req,res)=>{
+    var id=req.params.id;
+    const queryString="Delete from stock_manager where product_id=?";
+    connect.query(queryString,[id],(err,result) =>{
+        if(err){
+            console.log(err)
+            res.send(err);
+
+        }
+        console.log("deleted rows ",result.affectedRows);
+        res.status(200).send((result.affectedRows).toString());
+        
+    }
+
+    )
+})
 
 app.listen(3005, ()=>{
     console.log("server is on")

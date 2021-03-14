@@ -14,4 +14,10 @@ getprodlst(): Observable<any> {
     return this.http.get("http://localhost:3005/productlst/");
 }
 
+
+delprod(pid): Observable<any> {
+    return this.http.delete("http://localhost:3005/delStock/"+pid);
+}
+
+
 }

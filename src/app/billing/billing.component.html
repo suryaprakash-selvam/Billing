@@ -60,7 +60,7 @@
    <div class="card shadow"  style="width:100%; margin: 3%;"> 
     <br>
 
-        <table class="table table-striped table-bordered ">
+        <table class="table table-striped table-bordered " >
             <thead class="table-dark">
                 <tr>
                     <th>ProductName</th>
@@ -85,7 +85,7 @@
                         <label>{{field.totalprice}}</label>
                     </td>
                     <td>
-                        <i class="pi pi-times" (click)="deleteFieldValue(i,field.totalprice)"></i>
+                        <i class="pi pi-times" (click)="deleteFieldValue(i,field.totalprice,field.ProductName)"></i>
                        
                     </td>
                 </tr>
