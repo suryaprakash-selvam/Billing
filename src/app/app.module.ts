@@ -23,12 +23,17 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DialogModule} from 'primeng/dialog';
 import { UpdateAvailabilityComponent } from './update-availability/update-availability.component';
+import { StatusComponent } from './status/status.component';
+import {InputMaskModule} from 'primeng/inputmask';
+
+import {InputTextareaModule} from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
     AppComponent,
     NewproductComponent,
     BillingComponent,
-    UpdateAvailabilityComponent
+    UpdateAvailabilityComponent,
+    StatusComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -49,7 +54,9 @@ import { UpdateAvailabilityComponent } from './update-availability/update-availa
     InputSwitchModule,
     RadioButtonModule,
     InputNumberModule,
-    DialogModule
+    DialogModule,
+    InputTextareaModule,
+    InputMaskModule
 
 
   ],

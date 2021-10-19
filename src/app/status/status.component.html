@@ -1,0 +1,77 @@
+<div class="card shadow p-3 mb-5 bg-white rounded " style="margin: auto;">
+    <div class="card-header bg-primary rounded shadow" style="align-items: left;">
+    <h5>Create A Change Draft Request</h5>
+     </div>
+
+     <div class="container mt-5">
+    <div class="row" >
+
+     <div class="col-sm" style="align-self: left;">
+          
+        <span class="p-float-label">
+    <input id="float-input" type="text"   pInputText > 
+    <label for="float-input">Request Name</label></span>
+<br><br>
+<span class="p-float-label">
+    <textarea id="float-input" rows="2" cols="30" pInputTextarea></textarea>
+    <label for="float-input">Request Description</label>
+</span>
+<br><br>
+<span class="p-float-label">
+<input id="float-input" type="number"   pInputText> 
+    <label for="float-input">Model Name</label></span>
+<br><br>
+<span class="p-float-label">
+<input id="float-input" type="text"   pInputText> 
+    <label for="float-input">Model Type</label></span>
+<br><br>
+<span class="p-float-label">
+    <input id="float-input" type="text" pInputText> 
+        <label for="float-input">Staff Member</label></span>
+    <br><br>
+    <span class="p-float-label">
+        <input id="float-input" type="text"  pInputText> 
+            <label for="float-input">Contractor</label></span>
+        <br><br>
+
+        <span class="p-float-label">
+            <input id="float-input" type="text"  pInputText> 
+                <label for="float-input">CR Document</label></span>
+            <br><br>
+            
+            <span class="p-float-label">
+                <p-inputMask mask="99/99/9999"  slotChar="mm/dd/yyyy"></p-inputMask>
+                    <label for="float-input">Date</label></span>
+                <br><br>
+                <span class="p-float-label">
+                    <textarea id="float-input" rows="2" cols="30" pInputTextarea></textarea>
+                    <label for="float-input">Request Description</label>
+                </span>
+                <br><br>
+
+
+    </div>
+
+  <br>
+  <br>
+      <div class=" col-sm">
+          <div style="align-self: center;">
+           <label class="text-center" > List Of Files </label>
+        </div>
+           <div class="card" style="width: 18rem;height: 30rem; align-self: center;">
+              <p class="card-text">ADD Files</p>
+            </div>
+        <br>
+        <br>
+           <button pButton type="button bg-success"  label="Submit" (click)="postData()"></button><br>
+      </div>
+
+    </div>
+    
+</div>
+
+
+<p-toast></p-toast>
+
+
+

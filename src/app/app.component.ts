@@ -15,9 +15,7 @@ export class AppComponent {
     this.Billing= false;
     this.UA = false;
    }
-
    this.display = true;
-   
  }
  
 
