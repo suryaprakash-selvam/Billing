@@ -18,19 +18,19 @@
 </span>
 <br><br>
 <span class="p-float-label">
-<input id="float-input" type="number"   pInputText> 
+    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
     <label for="float-input">Model Name</label></span>
 <br><br>
 <span class="p-float-label">
-<input id="float-input" type="text"   pInputText> 
+    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
     <label for="float-input">Model Type</label></span>
 <br><br>
 <span class="p-float-label">
-    <input id="float-input" type="text" pInputText> 
+    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
         <label for="float-input">Staff Member</label></span>
     <br><br>
     <span class="p-float-label">
-        <input id="float-input" type="text"  pInputText> 
+        <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
             <label for="float-input">Contractor</label></span>
         <br><br>
 
@@ -59,7 +59,7 @@
            <label class="text-center" > List Of Files </label>
         </div>
            <div class="card" style="width: 18rem;height: 30rem; align-self: center;">
-              <p class="card-text">ADD Files</p>
+            <p-fileUpload name="myfile[]" url="./upload.php"></p-fileUpload>
             </div>
         <br>
         <br>

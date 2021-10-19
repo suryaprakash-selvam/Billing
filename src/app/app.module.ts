@@ -23,7 +23,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {DialogModule} from 'primeng/dialog';
 import { StatusComponent } from './status/status.component';
 import {InputMaskModule} from 'primeng/inputmask';
-
+import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
@@ -51,7 +51,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     InputNumberModule,
     DialogModule,
     InputTextareaModule,
-    InputMaskModule
+    InputMaskModule,
+    FileUploadModule
 
 
   ],
