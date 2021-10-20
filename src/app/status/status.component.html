@@ -9,42 +9,42 @@
      <div class="col-sm" style="align-self: left;">
           
         <span class="p-float-label">
-    <input id="float-input" type="text"   pInputText > 
+    <input id="float-input" type="text" [(ngModel)]="requestName"  pInputText > 
     <label for="float-input">Request Name</label></span>
 <br><br>
 <span class="p-float-label">
-    <textarea id="float-input" rows="2" cols="30" pInputTextarea></textarea>
+    <textarea id="float-input" rows="2" [(ngModel)]='requestDescripition' cols="30" pInputTextarea></textarea>
     <label for="float-input">Request Description</label>
 </span>
 <br><br>
 <span class="p-float-label">
-    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
+    <p-dropdown [style]="{'width': '12.5rem'}" (onChange)="mdlname($event)" [options]="modalnamedrp" optionLabel="name" [showClear]="true"></p-dropdown>
     <label for="float-input">Model Name</label></span>
 <br><br>
 <span class="p-float-label">
-    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
+    <p-dropdown [style]="{'width': '12.5rem'}"  (onChange)="mdltype($event)" [options]='modeltypedrp' optionLabel="name" [showClear]="true"></p-dropdown>
     <label for="float-input">Model Type</label></span>
 <br><br>
 <span class="p-float-label">
-    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
+    <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" (onChange)="staffmember($event)"  [options]='staffmemberdrp'  [showClear]="true"></p-dropdown>
         <label for="float-input">Staff Member</label></span>
     <br><br>
     <span class="p-float-label">
-        <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [style]="{'width': '12.5rem'}" optionLabel="name" (onChange)="contrac($event)"  [options]='contractor'  [showClear]="true"></p-dropdown>
             <label for="float-input">Contractor</label></span>
         <br><br>
 
         <span class="p-float-label">
-            <input id="float-input" type="text"  pInputText> 
+            <input id="float-input" type="text" [(ngModel)]='crDocument' pInputText> 
                 <label for="float-input">CR Document</label></span>
             <br><br>
             
             <span class="p-float-label">
-                <p-inputMask mask="99/99/9999"  slotChar="mm/dd/yyyy"></p-inputMask>
+                <p-inputMask mask="99/99/9999" [(ngModel)]='selectedDate' slotChar="mm/dd/yyyy"></p-inputMask>
                     <label for="float-input">Date</label></span>
                 <br><br>
                 <span class="p-float-label">
-                    <textarea id="float-input" rows="2" cols="30" pInputTextarea></textarea>
+                    <textarea id="float-input" rows="2" [(ngModel)]='additionalDescription' cols="30" pInputTextarea></textarea>
                     <label for="float-input">Request Description</label>
                 </span>
                 <br><br>

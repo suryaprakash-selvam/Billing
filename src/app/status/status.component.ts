@@ -10,83 +10,111 @@ import {productdet} from 'src/app/details/product'
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  ProductID : number;
-  Price:number
-  la:string
-  Remarks:string
-  checked:boolean;
-  cname:String
-  cities: any[];
-  productdet : productdet[];
-  label:any;
-  value:any;
-  selectedCityCode: string;
-  productdet1: any;
-  status: string;
-
-
-  constructor(private http:HttpClient, private _messageService: MessageService,private _productprice:productprice) { 
+  
+  requestName:string;
+  requestDescripition:string;
+  modelName:string;
+  modelType:string;
+  staffMember:string;
+  contrator:string;
+  crDocument:string;
+  date:Date;
+  additionalDescription:string;
+  selectedDate: any;
+  
+  modalnamedrp:any[]=[];
+  modeltypedrp:any[] =[];
+  staffmemberdrp:any[]=[];
+  contractor:any[]=[];
+    constructor(private http:HttpClient, private _messageService: MessageService,private _productprice:productprice) { 
   
   }
 
-  ngOnInit(): void {
-    this.checked=false;
-    this._productprice.getprodlst().subscribe(
-      datas =>{
-        this.productdet1=datas.data;
-        console.log("checking data"+this.productdet1);
-      }
-    );
 
-    this.checked=false;
+
+
+  ngOnInit() : void {
+
+    this.modalnamedrp = [
+      {name: '--Select--', code: ''},
+      {name: 'Halo-Model1', code: 'Halo-Model1'},
+      {name: 'Orbitor', code: 'Orbitor'},
+      {name: 'PPM', code: 'PPM'},
+      {name: 'Rover Model1', code: 'Rover Model1'}
+  ]
+    this.modeltypedrp =[
+      {name: '--Select--', code: ''},
+      {name: 'Abstract1', code: 'Abstract1'},
+      {name: 'Abstract2', code: 'Abstract2'},
+      {name: 'Abstract3', code: 'Abstract3'},
+    ]
+
+    this.staffmemberdrp =[
+      {name: '--Select--', code: ''},
+      {name: 'Soon', code: 'Soon'},
+      {name: 'Shanmuk', code: 'Shanmuk'}
+    ]
+
+    this.contractor=[
+      {name: '--Select--', code: ''},
+      {name: 'NASA', code: 'NASA'}
+    ]
   }
+
+
+mdlname(event){
+  console.log("log :"+ JSON.stringify(event.value.name))
+  this.modelName=event.value.name
+}
+mdltype(event){
+  console.log("log :"+ JSON.stringify(event.value.name))
+  this.modelType=event.value.name
+}
+staffmember(event){
+  console.log("log :"+ JSON.stringify(event.value.name))
+  this.staffMember=event.value.name
+}
+contrac(event){
+  console.log("log :"+ JSON.stringify(event.value.name))
+  this.contrator=event.value.name
+}
+
+
   postData(){
-    console.log("checking data"+this.ProductID);
-    if(this.checked == true){
-       this.status="A";
-    }else {
-      this.status="B";
-    }
-    let url="http://localhost:3005/stockupdate/"
+    let url="http://localhost:3030/form"
    this.http.post(url,{
-    Pid:this.ProductID,
-    Price:this.Price,
-    lastest_avaliabity : this.la,
-    Pname : this.Remarks,
-    cname : "Surya"
+    requestName:this.requestName,
+requestDescripition:this.requestDescripition,
+modelName:this.modelName,
+modelType:this.modelType,
+staffMember:this.staffMember,
+contrator:this.contrator,
+crDocument:this.crDocument,
+selectedDate:this.selectedDate,
+additionalDescription:this.additionalDescription
    } ).subscribe(data => {
     console.log(data);
-    this._messageService.add({severity:'success', summary:'Status ', detail:'Producted Added :' +this.ProductID});
+    this._messageService.add({severity:'success', summary:'Status ', detail:'Producted Added :' +this.requestName});
    this.update(data);
    },(error)=>{
      console.log(error);
-     this._messageService.add({severity:'error', summary:'error ', detail:'Producted Dupilcated :' + this.ProductID});
+     this._messageService.add({severity:'error', summary:'error ', detail:'Producted Dupilcated :' + this.requestName});
    });
   }
   
 update(data:any){
   console.log(data)
-  let url1="http://localhost:3005/produp/"
-  this.http.post(url1,{
-    ProductId:this.ProductID,
-    Price:this.Price,
-    ProductDes : this.Remarks,
-    Remarks : "Surya",
-    ProdStatus : this.status
-   } ).subscribe(data => {
-
-    this._messageService.add({severity:'success', summary:'Status ', detail:'Producted Added In Main :' +this.ProductID});
     console.log("suc  ",data);
-    this.ProductID = null
-    this.Price = null
-     this.Remarks=null
-     this.la=null
-   },(error) => {
-    console.log("err ",error);
-    this._messageService.add({severity:'error', summary:'error ', detail:'Producted Dupilcated :' + this.ProductID});
-   }
-
-   )
+    this.requestName=null
+    this.requestDescripition=null
+    this.modelName=null
+    this.modelType=null
+    this.staffMember=null
+    this.contrator=null
+    this.crDocument=null
+    this.selectedDate=null
+    this.additionalDescription=null
+  
 }
 
 }
